@@ -1,0 +1,4 @@
+
+Uma escola tem 5 turmas e cada turma tem n alunos.
+Crie um programa que escreva, o total de alunos, por turma,
+com média superior ou igual a 7 e a média geral da escola.
