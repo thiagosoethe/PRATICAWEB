@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <link rel="stylesheet" type="text/css" href="css/config.css">
+    <script src="js/validaProc.js"></script>
+</head>
+
+<body>
+    <section>
+        <h2>Calculadora</h2>
+        <font face="arial">
+            <form name="frmcad" action="#" method="get" onsubmit="return validaProc()">
+                <fieldset class="cadCalculo">
+                    <legend>Calcule</legend>
+                    <br>
+                    <label for="num1">Numero 1:</label>
+                    <input type="text" name="txtnum1" id="num1">
+                    <br><br>
+                    <label for="num2">Numero 2:</label>
+                    <input type="text" name="txtnum2" id="num2">
+                    <br><br>
+                    <label for="operacao">Operação (+ - x / ):</label>
+                    <input type="text" name="txtcalc" id="operacao">
+                    <br><br>
+                    <button type="reset">Limpar</button><button type="subimit">Enviar</button>
+
+
+
+                </fieldset>
+
+
+            </form>
+        </font>
+
+
+
+    </section>
+
+</body>
+
+</html>
