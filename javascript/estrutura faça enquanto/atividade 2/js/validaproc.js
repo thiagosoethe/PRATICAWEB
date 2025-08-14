@@ -1,20 +1,16 @@
 function validaProc() {
-    if(document.frmnumero.txtnum.value=="") {
-        alert("Por favor, preencha o campo número.");
-        document.frmnumero.txnum.focus();
-        return false;
-    }else{
-        let nu=parseInt(document.getElementById('num').value);
-        cont=1;
-        console.log("Tabuada do numero "+nu);
-        do{
-            console.log(nu + " x " + cont + " = " + (nu * cont));
-            cont=cont+1;
+    let numero1 = parseFloat(document.getElementById("num1").value);
+    let numero2 = parseFloat(document.getElementById("num2").value);
+    let somaCorreta = numero1 + numero2;
 
-        }while(cont <= 10) 
-        return false;
+    let resposta;
+    do {
+        resposta = parseFloat(prompt(`Qual é a soma de ${numero1} + ${numero2}?`));
+        if (resposta !== somaCorreta) {
+            alert("Tente novamente");
+        }
+    } while (resposta !== somaCorreta);
 
-    }
-
-
+    alert("Resultado correto!");
+    return false;
 }

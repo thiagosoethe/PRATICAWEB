@@ -1,0 +1,28 @@
+Estruturas de repetição
+
+Desafio 1
+
+
+Faça um programa que peça ao usuário dois números. Após, enquanto ele não digitar 
+o resultado correto da soma desses dois números, mostre na tela “tente novamente”, 
+quando acertar “resultado correto!”.
+
+Desafio 2 
+
+A academia de ginástica “SÓENGORDA LTDA.” necessita de uma solução que 
+calcule e informe o IMC (Indice de Massa Corpórea) de uma pessoa, considerando: 
+IMC = Peso / Altura * Altura. Permita que este programa seja executado quantas vezes 
+o usuário desejar.
+
+Desafio 3 
+
+Você criará um algoritmo que peça a idade, o gênero e o salário de um grupo de 
+pessoas. Quando o usuário quiser sair e encerrar o programa, ele deve digitar 
+“Finalizar”. Não se esqueça de validar para que o usuário digite exatamente 
+“Finalizar”. Ao final, você deve apresentar ao usuário:
+
+● A média de salário do grupo;
+● A média de todas as idades;
+● A média de salário do gênero feminino;
+● A média de salário do gênero masculino.
+

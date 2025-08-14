@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Academia SÓENGORDA LTDA - Cálculo de IMC</title>
+    <link rel="stylesheet" type="text/css" href="css/config.css">
+    <script src="js/validaProc.js"></script>
+</head>
+<body>
+    <section>
+        <h2>Academia SÓENGORDA LTDA</h2>
+        <font face="arial">
+            <form name="frm" action="#" method="get" onsubmit="return validaProc()">
+                <fieldset class="cadCalculo">
+                    <legend>Informe seus dados</legend>
+                    <br>
+
+                    <label for="anos">Idade</label>
+                    <input type="text" name="txtanos" id="anos">
+                    <br><br>
+
+                    <label for="genero">Genero:</label>
+                    <input type="text" name="txtgenero" id="genero">
+                    <br><br>
+                    
+                    <label for="salario">Salario:</label>
+                    <input type="text" name="txtsalario" id="salario">
+                    <br><br>
+
+                    <button type="submit">Calcular</button><button type="reset">Limpar</button>
+                </fieldset>
+            </form>
+        </font>
+    </section>
+</body>
+</html>

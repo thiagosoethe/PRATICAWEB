@@ -1,12 +1,12 @@
-function validaProc(){
+function validaPrfunction validaProc(){
     
-    if(document.frmcad.txtnome.value==""){
+    if(document.frmnumero.txtnum1.value==""){
         alert("campo do nome nao foi preenchido");
-        document.frmcad.txtnome.focus();
+        document.frmnumero.txtnum1.focus();
         return false;
-    }else if(document.frmcad.txtfone.value==""){
+    }else if(document.frmnumero.txtfone.value==""){
         alert("campo do telefone não foi preenchido");
-        document.frmcad.txtfone.focus();
+        document.frmnumero.txtnum2.focus();
         return false;
 
     }
