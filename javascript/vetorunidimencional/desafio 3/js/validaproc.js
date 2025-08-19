@@ -1,13 +1,19 @@
 function validaProc() {
-    let vetor = [];
+  let vetorValores = [2, 4, 6, 8, 10];
+  let vetorResultado = [];
+  
+  let valorUsuario = parseInt(prompt("Digite um valor inteiro para multiplicar:"));
 
-    for (let i = 0; i < 10; i++) {
-        vetor[i] = i * i;
-    }
+  for (let i = 0; i < vetorValores.length; i++) {
+      vetorResultado[i] = vetorValores[i] * valorUsuario;
+  }
+  
+  let mensagem = "=== RESULTADOS DO CÁLCULO ===\n\n";
+  for (let i = 0; i < vetorResultado.length; i++) {
+      mensagem += "Posição " + i + ": " + vetorResultado[i] + "\n";
+  }
 
-    console.log("=== VETOR DE QUADRADOS ===");
-    for (let i = 0; i < vetor.length; i++) {
-        console.log("Posição " + i + " : " + vetor[i]);
-    }
+  alert(mensagem);
+
+  return false;
 }
-

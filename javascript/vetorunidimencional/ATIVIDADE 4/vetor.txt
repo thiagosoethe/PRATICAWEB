@@ -1,0 +1,1 @@
+alimentar um vetor com 10 números reais e depois exibir os números localizados nas posições impares.

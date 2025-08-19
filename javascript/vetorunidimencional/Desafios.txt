@@ -1,0 +1,41 @@
+DESAFIOS VETORES
+
+DESAFIO 1
+
+Um professor do SENAI gostaria de uma aplicação que fizesse o cálculo da média de 
+seus 5 (cinco) alunos no bimestre. Como o bimestre é composto por 2 (duas) notas, 
+crie 2 (dois) vetores para armazenar cada uma das notas dos alunos. Depois, crie 
+outro vetor com o resultado da média dos alunos, seguindo a seguinte fórmula:
+
+Média da Nota[1] = (Nota do vetor A[1] + Nota do vetor B[1]) / 2
+
+========================================================
+
+DESAFIO 2
+
+Professor “Ludovico Volpato” está de volta e deseja uma solução que alimente um 
+vetor com 10 valores inteiros e também que solicite ao usuário a entrada de dados de 
+um valor inteiro qualquer. A solução deverá fazer uma busca do valor, informado pelo 
+usuário, no vetor e imprima a posição em que este foi encontrado ou se não foi 
+encontrado.
+
+========================================================
+
+DESAFIO 3 
+
+A empresa “SÓ CALCULO SEM PRECONCEITO” necessita agora de uma solução 
+que alimente um vetor com 5 valores inteiros e também que solicite ao usuário a 
+entrada de dados de um valor inteiro, após as devidas entradas de dados o programa 
+deve multiplicar o valor informado pelo usuário por cada elemento do vetor sendo que 
+o resultado deste cálculo deve ser armazenado em outro vetor, em suas respectivas 
+posições. Como resultado deseja-se a impressão dos valores dos resultados dos 
+cálculos, armazenados no segundo vetor.
+
+========================================================
+
+DESAFIO 4 
+
+A empresa “ORDEM DECRESCENTE” necessita de uma solução que alimente um 
+vetor com 4 valores numéricos inteiros. Como resultado deseja-se que imprima os 
+valores na ordem inversa com que foram armazenadas, ou seja, do valor localizado 
+na última posição para o valor localizado na primeira posição do vetor
