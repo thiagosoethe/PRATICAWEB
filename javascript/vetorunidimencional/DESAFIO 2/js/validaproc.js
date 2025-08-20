@@ -1,5 +1,5 @@
 function validaProc() {
-  let vetor = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,]; 
+  let vetor = [0, 1, 2, 2, 4, 5, 6, 7, 8, 9,]; 
   let valorBuscado = parseInt(prompt("Digite um valor inteiro para buscar no vetor:"));
   let posicaoEncontrada = -1;
   
