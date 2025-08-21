@@ -1,0 +1,26 @@
+Desafio 1
+
+O síndico do prédio “Balança mais não cai” solicitou uma solução que armazene em 
+uma matriz a renda de cada família moradora de um edifício, calculando a média e o 
+total de renda do mesmo. O prédio possui 6 andares e quatro apartamentos por 
+andar.
+
+Desafio2
+
+A empresa “Só soma Ltda.” necessita de uma solução que leia uma matriz 4x3 de 
+números reais e mostre a soma de seus elementos.
+
+Desafio 3 
+
+A empresa “Multiplica para ganhar Ltda.” solicitou uma solução que leia uma matriz 
+5 x 5 de números inteiros e gere outra matriz, de mesmo tamanho em que cada 
+elemento seja o dobro de seu respectivo da matriz original. Mostrar a matriz original 
+e a nova.
+
+Desafio 4 
+
+O professor “Ludovico Volpato” necessita de uma solução em que dada uma matriz 
+de 4x5 elementos, fazer um algoritmo para calcular a soma de cada linha e a soma 
+de todos os elementos.
+
+
