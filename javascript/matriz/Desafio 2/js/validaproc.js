@@ -10,17 +10,21 @@ function validaProc() {
         matriz[i] = []; 
         for (let j = 0; j < colunas; j++) {
 
-            let valor = parseFloat((Math.random() * 10).toFixed(2)); 
-            matriz[i][j] = valor;
+            let valor = parseFloat(prompt(`Digite o valor para a posição [${i}][${j}]:`));
+
+              if (isNaN(valor)) {
+                console.log(`Entrada inválida na posição [${i}][${j}]. Por favor, digite um número.`);
             
+            }
+            
+            matriz[i][j] = valor;
             somaTotal += valor;
 
             console.log(`Posição [${i}][${j}]: ${matriz[i][j]}`);
         }
     }
-
     console.log("\n--- RESULTADO DA SOMA ---");
     console.log(`A soma de todos os elementos da matriz é: ${somaTotal.toFixed(2)}`);
-
+    
     return false;
 }
