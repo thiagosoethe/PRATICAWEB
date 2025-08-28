@@ -1,1 +1,1 @@
-faça um algoritmo que leia 3 números e imprima seu somatório 
+foi desenvolvido um algoritmo que leia 3 números inteiro e falar qual foi maior numero lido

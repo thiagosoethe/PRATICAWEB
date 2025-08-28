@@ -1,66 +1,66 @@
 <!doctype html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Trabalho Final</title>
-    <link rel="stylesheet" href="/Trabalho FINAL/assets/css/style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Trabalho Final</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- JS -->
+  <script src="assets/js/portifolio.js" defer></script>
 </head>
-
 <body>
-    <div class="particulas"></div>
+  <div class="particulas"></div>
 
-    <header class="navegacao">
-        <div class="wrap">
-            <nav class="nav" aria-label="Navegação principal">
-                <div class="brand">Trabalho Final</div>
+  <header class="navegacao">
+    <div class="wrap">
+      <nav class="nav" aria-label="Navegação principal">
+        <div class="brand">Trabalho Final</div>
 
-                <div class="nav-item">
-                    <a class="nav-link active" href="javascript:abrirSecao('home')">
-                        Início <span class="underline"></span>
-                    </a>
-                </div>
-
-                <div class="nav-item">
-                    <a class="nav-link" href="javascript:abrirSecao('cond-se')">
-                        Estruturas<br>Condicionais <span class="underline"></span>
-                    </a>
-                    <div class="submenu" role="menu" aria-label="Condicionais">
-                        <button class="chip" onclick="abrirSecao('cond-se')">Se</button>
-                        <button class="chip" onclick="abrirSecao('cond-caso')">Caso</button>
-                    </div>
-                </div>
-
-                <div class="nav-item">
-                    <a class="nav-link" href="javascript:abrirSecao('rep-enquanto')">
-                        Estruturas de<br>Repetição <span class="underline"></span>
-                    </a>
-                    <div class="submenu" role="menu" aria-label="Repetição">
-                        <button class="chip" onclick="abrirSecao('rep-enquanto')">Enquanto</button>
-                        <button class="chip" onclick="abrirSecao('rep-facaEnquanto')">Faça Enquanto</button>
-                        <button class="chip" onclick="abrirSecao('rep-para')">Para</button>
-                    </div>
-                </div>
-
-                <div class="nav-item">
-                    <a class="nav-link" href="javascript:abrirSecao('vet-uni')">
-                        Vetores <span class="underline"></span>
-                    </a>
-                    <div class="submenu" role="menu" aria-label="Vetores">
-                        <button class="chip" onclick="abrirSecao('vet-uni')">Unidimensional</button>
-                        <button class="chip" onclick="abrirSecao('vet-bi')">Bidimensional</button>
-                    </div>
-                </div>
-
-                <div class="spacer"></div>
-            </nav>
+        <div class="nav-item">
+          <a class="nav-link active" href="javascript:abrirSecao('home')">
+            Início <span class="underline"></span>
+          </a>
         </div>
-    </header>
 
-    <main id="app" class="wrap"><!-- conteúdo via JS --></main>
+        <div class="nav-item">
+          <a class="nav-link" href="javascript:abrirSecao('cond-se')">
+            Estruturas<br>Condicionais <span class="underline"></span>
+          </a>
+          <div class="submenu" role="menu" aria-label="Condicionais">
+            <button class="chip" onclick="abrirSecao('cond-se')">Se</button>
+            <button class="chip" onclick="abrirSecao('cond-caso')">Caso</button>
+          </div>
+        </div>
 
-    <script src="/Trabalho FINAL/assets/js/portifolio.js" defer></script>
+        <div class="nav-item">
+          <a class="nav-link" href="javascript:abrirSecao('rep-enquanto')">
+            Estruturas de<br>Repetição <span class="underline"></span>
+          </a>
+          <div class="submenu" role="menu" aria-label="Repetição">
+            <button class="chip" onclick="abrirSecao('rep-enquanto')">Enquanto</button>
+            <button class="chip" onclick="abrirSecao('rep-facaEnquanto')">Faça Enquanto</button>
+            <button class="chip" onclick="abrirSecao('rep-para')">Para</button>
+          </div>
+        </div>
+
+        <div class="nav-item">
+          <a class="nav-link" href="javascript:abrirSecao('vet-uni')">
+            Vetores <span class="underline"></span>
+          </a>
+          <div class="submenu" role="menu" aria-label="Vetores">
+            <button class="chip" onclick="abrirSecao('vet-uni')">Unidimensional</button>
+            <button class="chip" onclick="abrirSecao('vet-bi')">Bidimensional</button>
+          </div>
+        </div>
+
+        <div class="spacer"></div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="app" class="wrap"></main>
 </body>
-
 </html>

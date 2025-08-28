@@ -1,13 +1,9 @@
-/* =================== RESET + TEMA (seu padrão) =================== */
+/* === Reset + tema básico === */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-html {
-    scroll-behavior: smooth;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 :root {
@@ -16,71 +12,57 @@ html {
     --escuro: #0f172a;
     --maisEscuro: #0a0f1c;
     --claro: #e2e8f0;
-    --vidro: rgba(255, 255, 255, 0.1);
+    --vidro: rgba(255, 255, 255, .1)
+}
+
+html {
+    scroll-behavior: smooth
 }
 
 body {
-    background-color: var(--escuro);
-    color: var(--claro);
+    background: var(--escuro);
+    color: var(--claro)
 }
 
 /* partículas de fundo */
 .particulas {
     position: fixed;
     inset: 0;
-    opacity: .5;
     z-index: -1;
+    opacity: .5;
     background:
-        radial-gradient(circle at 10% 20%, var(--primaria) 0%, transparent 20%),
-        radial-gradient(circle at 90% 80%, var(--secundaria) 0%, transparent 20%),
+        radial-gradient(circle at 10% 20%, var(--primaria)0, transparent 20%),
+        radial-gradient(circle at 90% 80%, var(--secundaria)0, transparent 20%),
         var(--maisEscuro);
 }
 
-/* =================== TOPO / NAVEGAÇÃO (vidro) =================== */
+/* topo / navegação */
 .navegacao {
     position: sticky;
     top: 0;
     z-index: 100;
-    width: 100%;
-    padding: 1.25rem 0;
+    padding: 1rem 0;
     background: rgba(15, 23, 42, .5);
     border-bottom: 1px solid var(--vidro);
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px)
 }
 
 .wrap {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 16px;
+    padding: 0 16px
 }
 
-.brand {
-    font-weight: 800;
-    letter-spacing: .2px;
-}
-
-/* barra de navegação */
 .nav {
     display: flex;
     align-items: center;
     gap: 32px;
-    height: 64px;
-    position: relative;
+    height: 64px
 }
 
-/* move o grupo do menu para a direita (ocupando o espaço vazio) */
-.nav .brand {
-    margin-right: auto;
-}
-
-/* empurra itens para a direita */
-.nav .spacer {
-    display: none;
-}
-
-/* remove espaço reservado à direita */
-.nav>.nav-item:first-of-type {
-    margin-left: 0;
+.brand {
+    font-weight: 800;
+    margin-right: auto
 }
 
 .nav-item {
@@ -92,10 +74,10 @@ body {
     text-decoration: none;
     font-weight: 700;
     opacity: .95;
-    position: relative;
     padding: 22px 6px;
     display: inline-flex;
     gap: 8px;
+    position: relative
 }
 
 .nav-link .underline {
@@ -107,7 +89,7 @@ body {
     background: linear-gradient(90deg, var(--primaria), var(--secundaria));
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform .25s ease;
+    transition: transform .25s ease
 }
 
 .nav-link.active .underline,
@@ -115,7 +97,7 @@ body {
     transform: scaleX(1)
 }
 
-/* =================== SUBMENUS (EMBAIXO do item) =================== */
+/* submenu */
 .submenu {
     position: absolute;
     top: 100%;
@@ -127,212 +109,152 @@ body {
     padding: 6px 0;
     pointer-events: none;
     opacity: 0;
-    transition: opacity .2s, transform .2s;
-    z-index: 200;
+    transition: opacity .2s, transform .2s
 }
 
 .nav-item:hover .submenu,
 .nav-item:focus-within .submenu {
     opacity: 1;
     pointer-events: auto;
-    transform: translateY(0);
+    transform: translateY(0)
 }
 
-/* chips do submenu */
 .chip {
     background: rgba(255, 255, 255, .05);
     color: var(--claro);
     border: 1px solid var(--vidro);
     border-radius: 10px;
     padding: 10px 14px;
-    backdrop-filter: blur(6px);
     cursor: pointer;
     min-width: 170px;
-    text-align: left;
-    transition: transform .2s, box-shadow .2s, border-color .2s;
+    text-align: left
 }
 
 .chip:hover {
-    transform: translateY(-2px);
-    border-color: transparent;
-    box-shadow: 0 0 10px rgba(79, 70, 229, .25);
+    background: rgba(255, 255, 255, .09)
 }
 
-/* =================== PÁGINA / CONTEÚDO =================== */
 main {
     padding: 90px 0 80px
 }
 
-/* 90px por causa da barra fixa */
 .title {
     text-align: center;
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: 900;
-    margin: 10px 0 30px;
-    color: var(--claro)
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 34px;
-    align-items: start;
-    max-width: 1100px;
-    margin: 0 auto;
+    margin: 10px 0 20px
 }
 
 .card {
     background: rgba(255, 255, 255, .05);
     border: 1px solid var(--vidro);
-    color: var(--claro);
     border-radius: 16px;
-    backdrop-filter: blur(6px);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, .18);
+    padding: 20px
 }
 
-.panel {
-    padding: 26px;
-    min-height: 220px
-}
-
-.soft {
-    background: rgba(255, 255, 255, .06)
-}
-
-/* Lateral de atividades */
-.side .head {
-    padding: 18px 22px;
-    background: rgba(255, 255, 255, .07);
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-    font-weight: 900;
-    letter-spacing: .3px;
-    font-size: 20px;
-}
-
-.list {
-    display: flex;
-    flex-direction: column
-}
-
-.item {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 18px;
-    border-top: 1px solid rgba(255, 255, 255, .08);
-    cursor: pointer;
-    background: transparent;
-    color: inherit;
-    border: none;
-    text-align: left;
-    transition: background .2s, transform .2s;
-}
-
-.item:hover {
-    background: rgba(255, 255, 255, .04);
-    transform: translateX(2px)
-}
-
-.item[aria-current="true"] {
-    background: linear-gradient(90deg, rgba(79, 70, 229, .15), rgba(124, 58, 237, .15));
-}
-
-/* "Ver código" – só aparece quando selecionada */
-.item .cta {
-    display: none;
-    font-size: 12px;
-    padding: 6px 10px;
-    border-radius: 8px;
-    background: linear-gradient(45deg, var(--primaria), var(--secundaria));
-    color: white;
-    border: none;
-}
-
-.item[aria-current="true"] .cta {
-    display: inline-block
-}
-
-/* Conteúdo à direita */
-.muted {
-    opacity: .95;
-    font-weight: 700;
-    font-size: 22px
-}
-
-.btn {
-    appearance: none;
-    border: 1px solid var(--vidro);
-    border-radius: 10px;
-    padding: 10px 12px;
-    background: linear-gradient(45deg, var(--primaria), var(--secundaria));
-    color: white;
-    cursor: pointer;
+/* ======= Layout da tela de atividades (print) ======= */
+.pagina-estrutura .topo-estrutura {
+    font-size: 1.6rem;
     font-weight: 800;
-    transition: transform .2s, box-shadow .2s;
+    text-align: center;
+    margin: 6px 0 22px
 }
 
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(79, 70, 229, .4)
-}
-
-pre {
-    margin: 0;
-    white-space: pre-wrap;
-    word-break: break-word;
-    font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-}
-
-/* Layout quando clica em "Ver código" */
-.content-2col {
+.grid-estrutura {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 28px;
-    align-items: start
+    grid-template-columns: 270px 1fr;
+    gap: 28px
 }
 
-.activity-banner {
-    width: 280px;
-    height: 120px;
-    border-radius: 14px;
-    background: rgba(255, 255, 255, .08);
+.sidebar {
+    background: linear-gradient(180deg, #3b3f4a, #222836);
     border: 1px solid var(--vidro);
+    border-radius: 12px;
+    padding: 14px 0
+}
+
+.sidebar h3 {
+    font-weight: 800;
+    font-size: 1.25rem;
+    margin: 0 18px 8px
+}
+
+.lista-atividades {
+    list-style: none;
+    margin-top: 6px
+}
+
+.lista-atividades li {
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-weight: 900;
-    font-size: 28px;
-    position: relative;
-    margin-bottom: 14px;
+    justify-content: space-between;
+    color: #cbd5e1;
+    padding: 12px 18px;
+    border-top: 1px solid rgba(255, 255, 255, .06);
+    cursor: pointer
 }
 
-.activity-banner .floating {
-    position: absolute;
-    left: 12px;
-    bottom: -16px
+.lista-atividades li:hover {
+    background: rgba(255, 255, 255, .05)
 }
 
-/* =================== RESPONSIVO =================== */
+.lista-atividades li.active {
+    background: rgba(99, 102, 241, .22)
+}
+
+.lista-atividades .ver {
+    font-size: .85rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, .18);
+    color: #e2e8f0;
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer
+}
+
+.lista-atividades .ver:hover {
+    background: rgba(255, 255, 255, .08)
+}
+
+.painel {
+    background: rgba(255, 255, 255, .05);
+    border: 1px solid var(--vidro);
+    border-radius: 12px;
+    padding: 22px;
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px
+}
+
+.painel .enunciado{
+    border:0;          
+    border-radius:12px;
+    padding:26px;
+    text-align:center;
+    font-size:1.1rem;
+    
+    background: rgba(255,255,255,.04);
+  }
+  
+
+.painel .meta {
+    opacity: .8;
+    font-size: .92rem
+}
+
+/* responsivo */
 @media (max-width:900px) {
-    .grid {
-        grid-template-columns: 1fr
+    .nav {
+        gap: 16px
     }
 
-    /* no mobile, submenu fica embaixo do item */
-    .submenu {
-        left: 0;
-        top: 100%;
-        transform: translateY(6px);
+    .chip {
+        min-width: 140px
     }
 
-    .nav-item:hover .submenu,
-    .nav-item:focus-within .submenu {
-        transform: translateY(0);
-    }
-
-    .content-2col {
-        grid-template-columns: 1fr
+    .grid-estrutura {
+        grid-template-columns: 1fr;
+        gap: 16px
     }
 }
