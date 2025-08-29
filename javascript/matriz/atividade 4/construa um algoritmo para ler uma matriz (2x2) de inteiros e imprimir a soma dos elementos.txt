@@ -1,1 +1,1 @@
-criar, alimentar e imprimir os dados de uma matriz 2 x 3
+Foi desenvolvido um sistema que criar, alimentar e imprimir os dados de uma matriz 2 x 3

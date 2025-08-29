@@ -1,12 +1,27 @@
+/* ========= NAV ========= */
+function marcarLinkAtivo(secao){
+  document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
+  const alvo = document.querySelector(`.nav-link[href="javascript:abrirSecao('${secao}')"]`);
+  if (alvo) alvo.classList.add('active');
+}
+
+/* ========= CONFIG ========= */
+const CONF_SECOES = {
+  'cond-se':          { titulo: 'Estrutura Condicional Se',             qtd: 2 },
+  'cond-caso':        { titulo: 'Estrutura Condicional Caso',           qtd: 2 },
+  'rep-enquanto':     { titulo: 'Estrutura de Repetição Enquanto',      qtd: 3 },
+  'rep-facaEnquanto': { titulo: 'Estrutura de Repetição Faça Enquanto', qtd: 3 },
+  'rep-para':         { titulo: 'Estrutura de Repetição Para',          qtd: 1 },
+  'vet-uni':          { titulo: 'Vetores Unidimensionais',              qtd: 4 },
+  'vet-bi':           { titulo: 'Vetores Bidimensionais',               qtd: 4 },
+};
+
 const ENUNCIADOS = {
   'cond-se': {
-    'a1':'-',
-    'a2':'-',
+    'a1':'Foi Desenvolvido uma aplicação web que, a partir de 3 notas de um aluno, informadas pelo usuário, calcule a sua média e de acordo com a mesma emita a situação do aluno: "Aprovado", "Recuperação" ou "Reprovado".. Lembrando que a média para aprovação é a de 7 ou maior e entre 5 e 6,9 o aluno está em recuperação e abaixo disso, reprovado.',
+    'a2':'Foi Desenvolvido uma aplicação web para ler dois números por exemplo: numero1 e numero 2. Em seguida, diga se o numero1 > numero 2 ou se numero2 > numero1 ou ainda se numero 1 = numero2',
   },
-  'cond-caso': {
-    'a1':'-',
-    'a2':'-',
-  },
+  'cond-caso': { 'a1':'-', 'a2':'-' },
   'rep-enquanto': {
     'a1': 'Foi desenvolvido um algoritmo que leia 3 números e imprima seu somatório',
     'a2': 'Foi desenvolvido um algoritmo que leia 3 números inteiro e falar qual foi maior numero lido',
@@ -17,9 +32,7 @@ const ENUNCIADOS = {
     'a2': 'Foi desenvolvido um programa para escrever a tabuada de um numero digitado pelo usuário.',
     'a3': 'Foi desenvolvido um sistema em que escreva o total de alunos por turma e mostre a media superior ou igual a 7 e a media geral da turma.'
   },
-  'rep-para': {
-    'a1':'-',
-  },
+  'rep-para': { 'a1':'-' },
   'vet-uni': {
     'a1':'Foi desenvolvido um algoritmo para ler as notas obtidas pelos alunos, e depois exibir um relatório das notas iguais ou superiores a 7,5.',
     'a2':'Foi desenvolvido um algoritmo para ler as notas obtidas pelos alunos, e depois exibir um relatório das notas iguais ou superiores a 7,5 e também no final a quantidade de notas igual ou superior a 7,5',
@@ -34,25 +47,14 @@ const ENUNCIADOS = {
   },
 };
 
-// ===== Utilitários =====
-function marcarLinkAtivo(secao){
-  document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
-  const alvo = document.querySelector(`.nav-link[href="javascript:abrirSecao('${secao}')"]`);
-  if (alvo) alvo.classList.add('active');
-}
-
+/* ========= AUX ========= */
 function getEnunciado(secao, id){
-  // se houver enunciado específico, usa ele
-  if (ENUNCIADOS[secao] && ENUNCIADOS[secao][id]) {
-    return ENUNCIADOS[secao][id];
-  }
-  // padrão
-  if (id === 'exemplo') return 'Enunciado do EXEMPLO desta estrutura.';
+  if (ENUNCIADOS[secao] && ENUNCIADOS[secao][id]) return ENUNCIADOS[secao][id];
+  if (id === 'exemplo') return 'EXEMPLO';
   const n = id.replace('a','');
   return `Enunciado da Atividade ${n} (troque depois).`;
 }
 
-// muda o enunciado ao clicar na lista
 function selecionarAtividade(secao, id){
   const lista = document.getElementById(`lista-${secao}`);
   if (!lista) return;
@@ -64,17 +66,34 @@ function selecionarAtividade(secao, id){
   if (box) box.textContent = getEnunciado(secao, id);
 }
 
-// placeholder para “Ver código”
+/* ========= MOSTRAR FORM DO HTML ========= */
+/* Pega o template do banco (#editors-bank) e injeta um clone (sem id)
+   dentro do painel da seção, quando clicar em “Ver código”. */
 function verCodigo(secao, id){
-  alert(`Você ligará aqui o código de: [${secao}] > [${id}].\n(placeholder)`);
+  selecionarAtividade(secao, id);
+
+  const host = document.getElementById(`code-host-${secao}`);
+  if (!host) return;
+
+  const tpl = document.getElementById(`editor-${secao}-${id}`);
+  host.innerHTML = '';
+  if (tpl){
+    // injeta uma cópia sem o id (para evitar ids duplicados)
+    const wrapper = document.createElement('div');
+    wrapper.className = 'editor';
+    wrapper.innerHTML = tpl.innerHTML;
+    host.appendChild(wrapper);
+    wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    host.innerHTML = `<div class="card"><p>Editor não encontrado para ${secao} / ${id}.</p></div>`;
+  }
 }
 
-// monta a tela no formato do seu print
+/* ========= TELA DAS SEÇÕES ========= */
 function montarTelaEstrutura(secao){
   const conf = CONF_SECOES[secao];
   if (!conf) return '<div class="card"><p>Seção não encontrada.</p></div>';
 
-  // lista: Exemplo + N atividades
   let itens = `
     <li id="li-${secao}-exemplo" class="active"
         onclick="selecionarAtividade('${secao}','exemplo')">
@@ -92,7 +111,6 @@ function montarTelaEstrutura(secao){
     `;
   }
 
-  // layout
   return `
     <section class="pagina-estrutura">
       <h2 class="topo-estrutura">${conf.titulo}</h2>
@@ -110,17 +128,19 @@ function montarTelaEstrutura(secao){
             ${getEnunciado(secao,'exemplo')}
           </div>
           <div class="meta">
-            Selecione uma atividade à esquerda. O botão <b>“Ver código”</b> vai direcionar ao codigo da proposta.
+            Selecione uma atividade e clique em <b>“Ver código”</b> para abrir o formulário desta atividade.
           </div>
+
+          <!-- Aqui o form correspondente é inserido -->
+          <div id="code-host-${secao}"></div>
         </section>
       </div>
     </section>
   `;
 }
 
-// ===== Roteamento no seu padrão =====
+/* ========= ROUTER ========= */
 function abrirSecao(secao) {
-  // remove active e marca o atual
   document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
   const alvo = document.querySelector(`.nav-link[href="javascript:abrirSecao('${secao}')"]`);
   if (alvo) alvo.classList.add('active');
@@ -135,25 +155,13 @@ function abrirSecao(secao) {
     return;
   }
 
-  // usa o mesmo layout para todas as estruturas, variando a quantidade
   if (CONF_SECOES[secao]) {
     document.getElementById('app').innerHTML = montarTelaEstrutura(secao);
     return;
   }
 
-  // fallback
   document.getElementById('app').innerHTML = `<div class="card"><p>Conteúdo em construção...</p></div>`;
 }
 
-// inicia na home
+/* boot */
 abrirSecao('home');
-// ===== Configuração de quantidades por seção =====
-const CONF_SECOES = {
-  'cond-se':          { titulo: 'Estrutura Condicional Se',             qtd: 2 },
-  'cond-caso':        { titulo: 'Estrutura Condicional Caso',           qtd: 2 },
-  'rep-enquanto':     { titulo: 'Estrutura de Repetição Enquanto',      qtd: 3 },
-  'rep-facaEnquanto': { titulo: 'Estrutura de Repetição Faça Enquanto', qtd: 3 },
-  'rep-para':         { titulo: 'Estrutura de Repetição Para',          qtd: 1 }, // ajuste se quiser mais
-  'vet-uni':          { titulo: 'Vetores Unidimensionais',              qtd: 4 },
-  'vet-bi':           { titulo: 'Vetores Bidimensionais',               qtd: 4 },
-};

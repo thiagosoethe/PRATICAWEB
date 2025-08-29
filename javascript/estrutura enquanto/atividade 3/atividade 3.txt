@@ -1,2 +1,2 @@
-ler 3 números inteiro positivo exibir a soma dos números que são divisíveis por 5.
+foi desenvolvido um sistema que leia 3 números inteiro positivo e depois exibir a soma dos números que são divisíveis por 5.
 
