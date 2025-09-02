@@ -1,0 +1,1 @@
+foi desenvolvido um algoritmo que leia 3 números e imprima seu somatório 

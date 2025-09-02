@@ -1,14 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Trabalho Final</title>
-
-  <!-- CSS -->
   <link rel="stylesheet" href="assets/css/style.css" />
-
-  <!-- JS -->
   <script src="assets/js/portifolio.js" defer></script>
 </head>
 <body>
@@ -17,7 +13,7 @@
   <header class="navegacao">
     <div class="wrap">
       <nav class="nav" aria-label="Navegação principal">
-        <div class="brand">Trabalho Final</div>
+        <div class="brand"><Fieldset>Trabalho Front End-Back End</Fieldset></div>
 
         <div class="nav-item">
           <a class="nav-link active" href="javascript:abrirSecao('home')">
@@ -27,7 +23,7 @@
 
         <div class="nav-item">
           <a class="nav-link" href="javascript:abrirSecao('cond-se')">
-            Estruturas<br>Condicionais <span class="underline"></span>
+            Estruturas<br />Condicionais <span class="underline"></span>
           </a>
           <div class="submenu" role="menu" aria-label="Condicionais">
             <button class="chip" onclick="abrirSecao('cond-se')">Se</button>
@@ -37,7 +33,7 @@
 
         <div class="nav-item">
           <a class="nav-link" href="javascript:abrirSecao('rep-enquanto')">
-            Estruturas de<br>Repetição <span class="underline"></span>
+            Estruturas de<br />Repetição <span class="underline"></span>
           </a>
           <div class="submenu" role="menu" aria-label="Repetição">
             <button class="chip" onclick="abrirSecao('rep-enquanto')">Enquanto</button>
@@ -60,344 +56,5 @@
   </header>
 
   <main id="app" class="wrap"></main>
-  <section id="editors-bank" style="display:none">
-
-    <!-- ====== COND-SE ====== -->
-    <div class="editor" id="editor-cond-se-exemplo">
-      <form>
-        <br>
-        <textarea name="fonte" cols="70" rows="20">
-          <!DOCTYPE html>
-          <html lang="pt-br">
-          <head>
-              <meta charset="UTF-8">
-              <title>Extrutura de javascript</title>
-              <link rel="stylesheet" type="text/css" href="/Trabalho FINAL/assets/css/at1se.css">
-              <script src="/Trabalho FINAL/assets/js/ati1se.js"></script>
-          </head>
-          <body>
-              <section>
-                  <h2>validação de campos de formularios(Estrutura SE (if()))</h2>
-                  <font face="arial">
-                      <form name="fmrnotas" action="#" method="get" onsubmit="return procFormulario()">
-                          <fieldset class="cadmediaaluno1">
-                              <legend> Dados pessoais</legend>
-                              <br><br>
-                              <label for="num1">Nota 1</label>
-                              <input type="text" name="txtnum1" id="num1">
-                              <br><br>
-                              <label for="num2">Nota 2</label>
-                              <input type="text" name="txtnum2" id="num2">
-                              <br><br>
-                              <label for="num3">Nota 3</label>
-                              <input type="text" name="txtnum3" id="num3">
-                              <br><br>
-                              <button type="reset">Limpar</button><button type="submit">Enviar</button>
-                          </fieldset>
-                      </form>
-                  </font>
-              </section>
-          </body>
-          </html>
-            </textarea>
-
-        <br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <div class="editor" id="editor-cond-se-a1">
-      <form>
-        <br>
-        <textarea name="fonte" cols="70" rows="20">
-               <html>
-                    <body>
-                       
-                        Página HTML
-     
-                        <script type="text/javascript">
-                           
-                             
-                             /*escreva seu código aqui*/
-                             
-                            
-     
-                        </script>
-     
-                    </body>
-                    </html>
-     
-                
-            </textarea>
-        <br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <div class="editor" id="editor-cond-se-a2">
-      <form>
-        <br>
-        <textarea name="fonte" cols="70" rows="20">
-               <html>
-                    <body>
-                       
-                        Página HTML
-     
-                        <script type="text/javascript">
-                           
-                             
-                             /*escreva seu código aqui*/
-                             
-                            
-     
-                        </script>
-     
-                    </body>
-                    </html>
-     
-                
-            </textarea>
-        <br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <!-- ====== COND-CASO ====== -->
-    <div class="editor" id="editor-cond-caso-exemplo">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <div class="editor" id="editor-cond-caso-a1">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <div class="editor" id="editor-cond-caso-a2">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <!-- ====== REP-ENQUANTO ====== -->
-    <div class="editor" id="editor-rep-enquanto-exemplo">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <div class="editor" id="editor-rep-enquanto-a1">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <div class="editor" id="editor-rep-enquanto-a2">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <div class="editor" id="editor-rep-enquanto-a3">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <!-- ====== REP-FAÇA ENQUANTO ====== -->
-    <div class="editor" id="editor-rep-facaEnquanto-exemplo">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <div class="editor" id="editor-rep-facaEnquanto-a1">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <div class="editor" id="editor-rep-facaEnquanto-a2">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <div class="editor" id="editor-rep-facaEnquanto-a3">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <!-- ====== REP-PARA ====== -->
-    <div class="editor" id="editor-rep-para-exemplo">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <div class="editor" id="editor-rep-para-a1">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <!-- ====== VET-UNI ====== -->
-    <div class="editor" id="editor-vet-uni-exemplo">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <div class="editor" id="editor-vet-uni-a1">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <div class="editor" id="editor-vet-uni-a2">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <div class="editor" id="editor-vet-uni-a3">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <div class="editor" id="editor-vet-uni-a4">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <!-- ====== VET-BI ====== -->
-    <div class="editor" id="editor-vet-bi-exemplo">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <div class="editor" id="editor-vet-bi-a1">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <div class="editor" id="editor-vet-bi-a2">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <div class="editor" id="editor-vet-bi-a3">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-    <div class="editor" id="editor-vet-bi-a4">
-      <form><br><textarea name="fonte" cols="70" rows="20">
-               <html><body> Página HTML
-<script type="text/javascript">/*escreva seu código aqui*/</script>
-</body></html>
-            </textarea><br><br>
-        <input type="button" value="Testar sua página" onclick="document.write(this.form.fonte.value);">
-      </form>
-    </div>
-
-  </section>
 </body>
-</html>
+</html> 

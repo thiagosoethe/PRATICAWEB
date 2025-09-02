@@ -1,0 +1,1 @@
+Armazene 3 números inteiros em um vetor.

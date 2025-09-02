@@ -1,120 +1,195 @@
-/* ========= NAV ========= */
-function marcarLinkAtivo(secao){
-  document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
-  const alvo = document.querySelector(`.nav-link[href="javascript:abrirSecao('${secao}')"]`);
-  if (alvo) alvo.classList.add('active');
+
+
+function getEnunciado(secao, id) {
+  if (ENUNCIADOS[secao] && ENUNCIADOS[secao][id]) {
+    return ENUNCIADOS[secao][id];
+  }
+  if (id === 'exemplo') return 'Exemplo prático da estrutura';
+  const n = id.replace('a', '');
+  return `Atividade ${n} - Desenvolva sua solução aqui.`;
 }
 
-/* ========= CONFIG ========= */
-const CONF_SECOES = {
-  'cond-se':          { titulo: 'Estrutura Condicional Se',             qtd: 2 },
-  'cond-caso':        { titulo: 'Estrutura Condicional Caso',           qtd: 2 },
-  'rep-enquanto':     { titulo: 'Estrutura de Repetição Enquanto',      qtd: 3 },
-  'rep-facaEnquanto': { titulo: 'Estrutura de Repetição Faça Enquanto', qtd: 3 },
-  'rep-para':         { titulo: 'Estrutura de Repetição Para',          qtd: 1 },
-  'vet-uni':          { titulo: 'Vetores Unidimensionais',              qtd: 4 },
-  'vet-bi':           { titulo: 'Vetores Bidimensionais',               qtd: 4 },
-};
+async function carregarCodigoReal(secao, id) {
+  const pasta = SECOES[secao].pasta;
+  let caminhos = [];
+  
+  if (id === 'exemplo') {
+    caminhos = [
+      `atividades/${pasta}/exemplo/index.html`,
+      `atividades/${pasta}/exemplo/Index.html`
+    ];
+  } else {
+    const numero = id.replace('a', '');
+    caminhos = [
+      `atividades/${pasta}/${numero.padStart(2, '0')}/index.html`,
+      `atividades/${pasta}/${numero}/index.html`,
+      `atividades/${pasta}/atividade ${numero}/index.html`
+    ];
+  }
 
-const ENUNCIADOS = {
-  'cond-se': {
-    'a1':'Foi Desenvolvido uma aplicação web que, a partir de 3 notas de um aluno, informadas pelo usuário, calcule a sua média e de acordo com a mesma emita a situação do aluno: "Aprovado", "Recuperação" ou "Reprovado".. Lembrando que a média para aprovação é a de 7 ou maior e entre 5 e 6,9 o aluno está em recuperação e abaixo disso, reprovado.',
-    'a2':'Foi Desenvolvido uma aplicação web para ler dois números por exemplo: numero1 e numero 2. Em seguida, diga se o numero1 > numero 2 ou se numero2 > numero1 ou ainda se numero 1 = numero2',
-  },
-  'cond-caso': { 'a1':'-', 'a2':'-' },
-  'rep-enquanto': {
-    'a1': 'Foi desenvolvido um algoritmo que leia 3 números e imprima seu somatório',
-    'a2': 'Foi desenvolvido um algoritmo que leia 3 números inteiro e falar qual foi maior numero lido',
-    'a3': 'Foi desenvolvido um sistema que leia 3 números inteiro positivo e depois exibir a soma dos números que são divisíveis por 5.'
-  },
-  'rep-facaEnquanto': {
-    'a1': 'foi desenvolvido um algoritmo que leia quantos números que o usuário deseja informar e imprima seu somatório e para finalizar a estrutura digite 0...',
-    'a2': 'Foi desenvolvido um programa para escrever a tabuada de um numero digitado pelo usuário.',
-    'a3': 'Foi desenvolvido um sistema em que escreva o total de alunos por turma e mostre a media superior ou igual a 7 e a media geral da turma.'
-  },
-  'rep-para': { 'a1':'-' },
-  'vet-uni': {
-    'a1':'Foi desenvolvido um algoritmo para ler as notas obtidas pelos alunos, e depois exibir um relatório das notas iguais ou superiores a 7,5.',
-    'a2':'Foi desenvolvido um algoritmo para ler as notas obtidas pelos alunos, e depois exibir um relatório das notas iguais ou superiores a 7,5 e também no final a quantidade de notas igual ou superior a 7,5',
-    'a3':'Foi desenvolvido um programa para gerar um vetor de 10 posições, onde cada elemento corresponde ao quadrado de sua posição. e imprima depois os dados armazenados no vetor',
-    'a4':'foi desenvolvido um programa para alimentar um vetor com 10 números reais e depois exibir os números localizados nas posições impares.',
-  },
-  'vet-bi': {
-    'a1':'Foi desenvolvido um sistema para alimentar uma matriz (3x3) de valores inteiros, multiplicando essa matriz por um valor informado pelo usuário e escrevendo o conteúdo da matriz multiplicada.',
-    'a2':'Foi desenvolvido um sistema que construa um algoritmo para ler uma matriz (2x2) de inteiros e imprimir a soma dos elementos de uma linha fornecida pelo usuário',
-    'a3':'Foi desenvolvido um programa que crie uma matriz (2x2) onde o valor de cada elemento dentro da matriz é a soma dos índices da sua posição',
-    'a4':'Foi desenvolvido um sistema que criar, alimentar e imprimir os dados de uma matriz 2 x 3',
-  },
-};
-
-/* ========= AUX ========= */
-function getEnunciado(secao, id){
-  if (ENUNCIADOS[secao] && ENUNCIADOS[secao][id]) return ENUNCIADOS[secao][id];
-  if (id === 'exemplo') return 'EXEMPLO';
-  const n = id.replace('a','');
-  return `Enunciado da Atividade ${n} (troque depois).`;
+  for (const caminho of caminhos) {
+    try {
+      const response = await fetch(caminho);
+      if (response.ok) {
+        let codigo = await response.text();
+        console.log(`Código carregado de: ${caminho}`);
+        const basePath = caminho.replace('/index.html', '');
+        codigo = codigo.replace(/href="css\//g, `href="${basePath}/css/`);
+        codigo = codigo.replace(/src="js\//g, `src="${basePath}/js/`);
+        
+        return codigo;
+      }
+    } catch (error) {
+      console.log(`Tentativa falhou: ${caminho}`);
+    }
+  }
+  console.log(`Nenhum arquivo encontrado para ${secao}/${id}, usando template padrão`);
+  return getTemplate(secao, id);
 }
-
-function selecionarAtividade(secao, id){
+function getTemplate(secao, id) {
+  if (id === 'exemplo') {
+    return TEMPLATES.exemplo.replace(/{titulo}/g, SECOES[secao].titulo);
+  }
+  const numero = id.replace('a', '');
+  return TEMPLATES.atividade.replace(/{numero}/g, numero);
+}
+function selecionarAtividade(secao, id) {
   const lista = document.getElementById(`lista-${secao}`);
-  if (!lista) return;
-  [...lista.children].forEach(li => li.classList.remove('active'));
-  const alvo = document.getElementById(`li-${secao}-${id}`);
-  if (alvo) alvo.classList.add('active');
-
-  const box = document.getElementById(`enun-${secao}`);
-  if (box) box.textContent = getEnunciado(secao, id);
+  if (lista) {
+    [...lista.children].forEach(li => li.classList.remove('active'));
+    const alvo = document.getElementById(`li-${secao}-${id}`);
+    if (alvo) alvo.classList.add('active');
+  }
+  const enunciado = document.getElementById(`enun-${secao}`);
+  if (enunciado) enunciado.textContent = getEnunciado(secao, id);
+  const host = document.getElementById(`code-host-${secao}`);
+  if (host) host.innerHTML = '';
 }
-
-/* ========= MOSTRAR FORM DO HTML ========= */
-/* Pega o template do banco (#editors-bank) e injeta um clone (sem id)
-   dentro do painel da seção, quando clicar em “Ver código”. */
-function verCodigo(secao, id){
+async function verCodigo(secao, id) {
   selecionarAtividade(secao, id);
-
   const host = document.getElementById(`code-host-${secao}`);
   if (!host) return;
-
-  const tpl = document.getElementById(`editor-${secao}-${id}`);
+  const fileName = id === 'exemplo' ? `${secao}-exemplo.html` : `${secao}-atividade${id.replace('a', '')}.html`;
+  host.innerHTML = `
+    <div class="editor loading">
+      <div class="editor-header">
+        <div class="editor-tab">${fileName}</div>
+      </div>
+      <div class="editor-content" style="display: flex; align-items: center; justify-content: center; min-height: 400px;">
+        <p style="color: #888;">Carregando código...</p>
+      </div>
+    </div>
+  `;
+  const code = await carregarCodigoReal(secao, id);
+  const editor = document.createElement('div');
+  editor.className = 'editor';
+  editor.innerHTML = `
+    <div class="editor-header">
+      <div class="editor-tab">${fileName}</div>
+    </div>
+    <div class="editor-main">
+      <div class="editor-content">
+        <form>
+          <textarea name="fonte">${code}</textarea>
+        </form>
+      </div>
+      <div class="preview-content" id="preview-${secao}-${id}" style="display: none;">
+        <div class="preview-header">
+          <span>Preview</span>
+          <div class="preview-controls">
+            <button type="button" class="btn-expand-preview" onclick="toggleExpandPreview('${secao}', '${id}')" title="Expandir Preview">
+              ⛶
+            </button>
+            <button type="button" class="btn-close-preview" onclick="togglePreview('${secao}', '${id}', false)" title="Fechar Preview">
+              ✕
+            </button>
+          </div>
+        </div>
+        <iframe class="preview-frame" sandbox="allow-scripts allow-same-origin"></iframe>
+      </div>
+    </div>
+    <div class="editor-footer">
+      <button type="button" class="btn-test" onclick="executarCodigo('${secao}', '${id}')">▶ Executar</button>
+      <button type="button" class="btn-toggle-preview" onclick="togglePreview('${secao}', '${id}')">👁️ Preview</button>
+      <span style="color: #858585; font-size: 0.8rem;">Código Real da Atividade</span>
+    </div>
+  `;
   host.innerHTML = '';
-  if (tpl){
-    // injeta uma cópia sem o id (para evitar ids duplicados)
-    const wrapper = document.createElement('div');
-    wrapper.className = 'editor';
-    wrapper.innerHTML = tpl.innerHTML;
-    host.appendChild(wrapper);
-    wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  host.appendChild(editor);
+  editor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function executarCodigo(secao, id) {
+  const editor = document.querySelector(`#code-host-${secao} .editor`);
+  const textarea = editor.querySelector('textarea[name="fonte"]');
+  const previewArea = document.getElementById(`preview-${secao}-${id}`);
+  const iframe = previewArea.querySelector('.preview-frame');
+  if (textarea && textarea.value.trim()) {
+    previewArea.style.display = 'flex';
+    iframe.srcdoc = textarea.value;
+    updateLayout(secao, id, true);
   } else {
-    host.innerHTML = `<div class="card"><p>Editor não encontrado para ${secao} / ${id}.</p></div>`;
+    alert('Por favor, insira algum código para executar.');
   }
 }
-
-/* ========= TELA DAS SEÇÕES ========= */
-function montarTelaEstrutura(secao){
-  const conf = CONF_SECOES[secao];
+function togglePreview(secao, id, show = null) {
+  const previewArea = document.getElementById(`preview-${secao}-${id}`);
+  const isVisible = previewArea.style.display !== 'none';
+  if (show === null) show = !isVisible;
+  previewArea.style.display = show ? 'flex' : 'none';
+  updateLayout(secao, id, show);
+}
+function updateLayout(secao, id, showPreview) {
+  const editor = document.querySelector(`#code-host-${secao} .editor`);
+  const editorMain = editor.querySelector('.editor-main');
+  if (showPreview) {
+    editorMain.style.display = 'flex';
+    editorMain.style.flexDirection = 'row';
+  } else {
+    editorMain.style.display = 'block';
+  }
+}
+function toggleExpandPreview(secao, id) {
+  const editor = document.querySelector(`#code-host-${secao} .editor`);
+  const previewArea = document.getElementById(`preview-${secao}-${id}`);
+  const expandBtn = previewArea.querySelector('.btn-expand-preview');
+  const isExpanded = editor.classList.contains('preview-expanded');
+  if (isExpanded) {
+    editor.classList.remove('preview-expanded');
+    expandBtn.innerHTML = '⛶';
+    expandBtn.title = 'Expandir Preview';
+    document.removeEventListener('keydown', handleEscapeKey);
+  } else {
+    editor.classList.add('preview-expanded');
+    expandBtn.innerHTML = '⛷';
+    expandBtn.title = 'Reduzir Preview';
+    document.addEventListener('keydown', handleEscapeKey);
+  }
+  function handleEscapeKey(event) {
+    if (event.key === 'Escape') {
+      toggleExpandPreview(secao, id);
+    }
+  }
+}
+function montarTelaEstrutura(secao) {
+  const conf = SECOES[secao];
   if (!conf) return '<div class="card"><p>Seção não encontrada.</p></div>';
-
   let itens = `
-    <li id="li-${secao}-exemplo" class="active"
-        onclick="selecionarAtividade('${secao}','exemplo')">
+    <li id="li-${secao}-exemplo" class="active" onclick="selecionarAtividade('${secao}','exemplo')">
       <span>Exemplo</span>
       <button class="ver" onclick="verCodigo('${secao}','exemplo');event.stopPropagation()">Ver código</button>
     </li>
   `;
-  for (let i = 1; i <= conf.qtd; i++){
+  for (let i = 1; i <= conf.qtd; i++) {
     itens += `
-      <li id="li-${secao}-a${i}"
-          onclick="selecionarAtividade('${secao}','a${i}')">
+      <li id="li-${secao}-a${i}" onclick="selecionarAtividade('${secao}','a${i}')">
         <span>Atividade ${i}</span>
         <button class="ver" onclick="verCodigo('${secao}','a${i}');event.stopPropagation()">Ver código</button>
       </li>
     `;
   }
-
   return `
     <section class="pagina-estrutura">
       <h2 class="topo-estrutura">${conf.titulo}</h2>
-
       <div class="grid-estrutura">
         <aside class="sidebar" aria-label="Atividades">
           <h3>Atividades</h3>
@@ -122,46 +197,129 @@ function montarTelaEstrutura(secao){
             ${itens}
           </ul>
         </aside>
-
         <section class="painel">
           <div class="enunciado" id="enun-${secao}">
-            ${getEnunciado(secao,'exemplo')}
+            ${getEnunciado(secao, 'exemplo')}
           </div>
           <div class="meta">
-            Selecione uma atividade e clique em <b>“Ver código”</b> para abrir o formulário desta atividade.
+            Selecione uma atividade e clique em <b>"Ver código"</b> para abrir o editor.
           </div>
-
-          <!-- Aqui o form correspondente é inserido -->
           <div id="code-host-${secao}"></div>
         </section>
       </div>
     </section>
   `;
 }
-
-/* ========= ROUTER ========= */
 function abrirSecao(secao) {
   document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
   const alvo = document.querySelector(`.nav-link[href="javascript:abrirSecao('${secao}')"]`);
   if (alvo) alvo.classList.add('active');
-
+  const app = document.getElementById('app');
   if (secao === 'home') {
-    document.getElementById('app').innerHTML = `
-      <h1 class="title">Conceitos Sobres Estruturas em Html, Css, e Javascript</h1>
+    app.innerHTML = `
+      <h1 class="title">Conceitos Sobre Estruturas em HTML, CSS e JavaScript</h1>
       <div class="card">
-        <p>Baseado nos conhecimentos fundamentais em HTML, CSS e JavaScript, foi desenvolvido uma solução de um site sirva como um repositório de atividades propostas de programação desenvolvidas em HTML, CSS e JavaScript servindo de base para futuras consultas quando houver necessidade ou também para pessoas que estejam em processo de aprendizagem.</p>
+        <p>Repositório das atividades em programação desenvolvidas com HTML, CSS e JavaScript, organizado para reunir exercícios práticos, exemplos comentados e pequenos projetos que consolidam os principais conceitos da web. Serve como uma base de conhecimento viva para consultas futuras, permitindo revisar rapidamente estruturas fundamentais. </p>
       </div>
     `;
     return;
   }
-
-  if (CONF_SECOES[secao]) {
-    document.getElementById('app').innerHTML = montarTelaEstrutura(secao);
+  if (SECOES[secao]) {
+    app.innerHTML = montarTelaEstrutura(secao);
     return;
   }
-
-  document.getElementById('app').innerHTML = `<div class="card"><p>Conteúdo em construção...</p></div>`;
+  app.innerHTML = `<div class="card"><p>Conteúdo em construção...</p></div>`;
 }
+const SECOES = {
+  'cond-se': { titulo: 'Estrutura Condicional Se', pasta: 'if', qtd: 2 },
+  'cond-caso': { titulo: 'Estrutura Condicional Caso', pasta: 'switch', qtd: 2 },
+  'rep-enquanto': { titulo: 'Estrutura de Repetição Enquanto', pasta: 'while', qtd: 3 },
+  'rep-facaEnquanto': { titulo: 'Estrutura de Repetição Faça Enquanto', pasta: 'do_while', qtd: 3 },
+  'rep-para': { titulo: 'Estrutura de Repetição Para', pasta: 'for', qtd: 1 },
+  'vet-uni': { titulo: 'Vetores Unidimensionais', pasta: 'vector', qtd: 4 },
+  'vet-bi': { titulo: 'Vetores Bidimensionais', pasta: 'matriz', qtd: 4 }
+};
+const ENUNCIADOS = {
+  'cond-se': {
+    'a1': 'Validação de campos de formulários - Estrutura SE (if). Calcule a média de 3 notas e determine a situação do aluno.',
+    'a2': 'Aplicação para comparar dois números e informar qual é maior ou se são iguais.'
+  },
+  'cond-caso': {
+    'a1': 'Estrutura SWITCH - Classificação por idade. Sistema que classifica pessoas em faixas etárias.',
+    'a2': 'Calculadora simples usando estrutura SWITCH com as quatro operações básicas.'
+  },
+  'rep-enquanto': {
+    'a1': 'Algoritmo que leia 3 números e imprima seu somatório usando estrutura WHILE.',
+    'a2': 'Programa que leia 3 números inteiros e informe qual foi o maior número lido.',
+    'a3': 'Sistema que leia 3 números inteiros positivos e exiba a soma dos números divisíveis por 5.'
+  },
+  'rep-facaEnquanto': {
+    'a1': 'Algoritmo que leia quantos números o usuário desejar e imprima o somatório (digite 0 para finalizar).',
+    'a2': 'Programa para gerar a tabuada de um número digitado pelo usuário usando DO-WHILE.',
+    'a3': 'Foi desenvolvido um sistema em que escreva o total de alunos por turma e mostre a media superior ou igual a 7 e a media geral da turma.'
+  },
+  'rep-para': {
+    'a1': 'Implementação de contador ou laço usando estrutura FOR.'
+  },
+  'vet-uni': {
+    'a1': 'Algoritmo para ler notas de alunos e exibir relatório das notas iguais ou superiores a 7,5.',
+    'a2': 'Relatório de notas ≥ 7,5 com contador de quantas notas atendem ao critério.',
+    'a3': 'Programa para gerar vetor de 10 posições onde cada elemento é o quadrado de sua posição.',
+    'a4': 'Sistema para alimentar vetor com 10 números reais e exibir números em posições ímpares.'
+  },
+  'vet-bi': {
+    'a1': 'Sistema para alimentar matriz (3x3) de valores inteiros e multiplicar por um valor do usuário.',
+    'a2': 'Algoritmo para ler matriz (2x2) de inteiros e imprimir soma dos elementos de uma linha.',
+    'a3': 'Programa que cria matriz (2x2) onde cada elemento é a soma dos índices de sua posição.',
+    'a4': 'Sistema para criar, alimentar e imprimir dados de uma matriz 2x3.'
+  }
+};
+const TEMPLATES = {
+  exemplo: `<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Exemplo - {titulo}</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; }
+        input, button { padding: 8px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>{titulo}</h2>
+        <p>Este é um exemplo de {titulo}</p>
+        
+        <script>
+            // Exemplo de código JavaScript
+            console.log("Exemplo funcionando!");
+        </script>
+    </div>
+</body>
+</html>`,
 
-/* boot */
+  atividade: `<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Atividade {numero}</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; }
+        input, button { padding: 8px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Atividade {numero}</h2>
+        
+        <script>
+            // Escreva seu código aqui
+            
+        </script>
+    </div>
+</body>
+</html>`
+};
 abrirSecao('home');

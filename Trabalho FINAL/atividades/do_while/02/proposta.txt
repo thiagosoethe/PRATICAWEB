@@ -1,0 +1,1 @@
+Foi desenvolvido um programa para escrever a tabuada de um numero digitado pelo usuário.

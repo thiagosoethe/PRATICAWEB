@@ -149,10 +149,14 @@ main {
     background: rgba(255, 255, 255, .05);
     border: 1px solid var(--vidro);
     border-radius: 16px;
-    padding: 20px
-}
+    padding: 20px;
 
-/* ======= Layout da tela de atividades (print) ======= */
+    max-width: 880px;   /* ajuste: 720–960px */
+    margin: 0 auto;     /* centraliza o bloco */
+    text-align: center; /* centraliza as linhas de texto */
+  }
+  
+
 .pagina-estrutura .topo-estrutura {
     font-size: 1.6rem;
     font-weight: 800;
@@ -243,6 +247,261 @@ main {
     font-size: .92rem
 }
 
+
+.editor {
+    background: #1e1e1e;
+    border: 1px solid #404040;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    margin-top: 16px;
+}
+
+.editor-header {
+    background: #2d2d30;
+    border-bottom: 1px solid #404040;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.9rem;
+    color: #cccccc;
+}
+
+.editor-tab {
+    background: #3c3c3c;
+    border: 1px solid #404040;
+    border-radius: 4px 4px 0 0;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    color: #cccccc;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.editor-tab::before {
+    content: "📄";
+    font-size: 0.8rem;
+}
+
+.editor-main {
+    display: block;
+    background: #1e1e1e;
+}
+
+.editor-content {
+    display: flex;
+    background: #1e1e1e;
+    min-height: 400px;
+    flex: 1;
+}
+
+.preview-content {
+    display: none;
+    flex-direction: column;
+    background: #2d2d30;
+    border-left: 1px solid #404040;
+    width: 50%;
+    min-height: 400px;
+}
+
+.preview-header {
+    background: #3c3c3c;
+    border-bottom: 1px solid #404040;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #cccccc;
+}
+
+.preview-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.btn-close-preview,
+.btn-expand-preview {
+    background: transparent;
+    border: none;
+    color: #cccccc;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.btn-close-preview:hover,
+.btn-expand-preview:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-expand-preview {
+    font-size: 16px;
+}
+
+
+.editor.preview-expanded {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    background: #1e1e1e;
+    margin: 0;
+    border-radius: 0;
+}
+
+.editor.preview-expanded .editor-header {
+    background: #2d2d30;
+    border-bottom: 1px solid #404040;
+    padding: 12px 20px;
+}
+
+.editor.preview-expanded .editor-main {
+    height: calc(100vh - 120px);
+    display: flex !important;
+    flex-direction: row !important;
+}
+
+.editor.preview-expanded .editor-content {
+    width: 40%;
+    min-width: 400px;
+}
+
+.editor.preview-expanded .preview-content {
+    width: 60% !important;
+    display: flex !important;
+}
+
+.editor.preview-expanded .preview-frame {
+    width: 100%;
+    height: 100%;
+}
+
+.editor.preview-expanded .editor-footer {
+    background: #2d2d30;
+    border-top: 1px solid #404040;
+    padding: 12px 20px;
+}
+
+
+.editor.preview-expanded::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: -1;
+}
+
+.preview-frame {
+    flex: 1;
+    border: none;
+    background: white;
+    width: 100%;
+    height: 100%;
+}
+
+.editor form {
+    flex: 1;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.editor textarea {
+    background: #1e1e1e !important;
+    color: #d4d4d4 !important;
+    border: none !important;
+    padding: 12px 16px !important;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace !important;
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+    resize: none !important;
+    outline: none !important;
+    width: 100% !important;
+    min-height: 400px !important;
+    flex: 1 !important;
+    box-sizing: border-box !important;
+}
+
+.editor textarea::-webkit-scrollbar {
+    width: 12px;
+}
+
+.editor textarea::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+.editor textarea::-webkit-scrollbar-thumb {
+    background: #424242;
+    border-radius: 6px;
+}
+
+.editor textarea::-webkit-scrollbar-thumb:hover {
+    background: #4f4f4f;
+}
+
+.editor-footer {
+    background: #2d2d30;
+    border-top: 1px solid #404040;
+    padding: 12px 16px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.editor .btn-test {
+    background: #0e639c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-right: 8px;
+}
+
+.editor .btn-test:hover {
+    background: #1177bb;
+}
+
+.editor .btn-toggle-preview {
+    background: #6b5b95;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-right: 12px;
+}
+
+.editor .btn-toggle-preview:hover {
+    background: #7d6ba8;
+}
+
+/* Syntax highlighting básico */
+.syntax-html { color: #569cd6; }
+.syntax-tag { color: #92c5f7; }
+.syntax-attribute { color: #9cdcfe; }
+.syntax-string { color: #ce9178; }
+.syntax-comment { color: #6a9955; font-style: italic; }
+.syntax-javascript { color: #d7ba7d; }
+.syntax-css { color: #d4d4d4; }
+.syntax-selector { color: #d7ba7d; }
+.syntax-property { color: #9cdcfe; }
+.syntax-value { color: #ce9178; }
+
 /* responsivo */
 @media (max-width:900px) {
     .nav {
@@ -256,5 +515,13 @@ main {
     .grid-estrutura {
         grid-template-columns: 1fr;
         gap: 16px
+    }
+    
+    .editor textarea {
+        font-size: 12px !important;
+    }
+    
+    .line-numbers {
+        font-size: 12px;
     }
 }

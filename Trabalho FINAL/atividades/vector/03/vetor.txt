@@ -1,0 +1,2 @@
+Foi desenvolvido um programa para gerar um vetor de 10 posições, onde cada elemento corresponde ao quadrado de sua posição. e imprima depois os dados armazenados no vetor
+

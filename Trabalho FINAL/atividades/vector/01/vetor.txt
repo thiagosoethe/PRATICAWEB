@@ -1,0 +1,3 @@
+Foi desenvolvido um algoritmo para ler as notas obtidas pelos alunos,
+e depois exibir um relatório das notas iguais ou
+superiores a 7,5.
