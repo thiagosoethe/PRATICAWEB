@@ -1,5 +1,4 @@
 
-
 function getEnunciado(secao, id) {
   if (ENUNCIADOS[secao] && ENUNCIADOS[secao][id]) {
     return ENUNCIADOS[secao][id];
@@ -26,7 +25,6 @@ async function carregarCodigoReal(secao, id) {
       `atividades/${pasta}/atividade ${numero}/index.html`
     ];
   }
-
   for (const caminho of caminhos) {
     try {
       const response = await fetch(caminho);
@@ -36,7 +34,6 @@ async function carregarCodigoReal(secao, id) {
         const basePath = caminho.replace('/index.html', '');
         codigo = codigo.replace(/href="css\//g, `href="${basePath}/css/`);
         codigo = codigo.replace(/src="js\//g, `src="${basePath}/js/`);
-        
         return codigo;
       }
     } catch (error) {
@@ -93,81 +90,49 @@ async function verCodigo(secao, id) {
           <textarea name="fonte">${code}</textarea>
         </form>
       </div>
-      <div class="preview-content" id="preview-${secao}-${id}" style="display: none;">
-        <div class="preview-header">
-          <span>Preview</span>
-          <div class="preview-controls">
-            <button type="button" class="btn-expand-preview" onclick="toggleExpandPreview('${secao}', '${id}')" title="Expandir Preview">
-              ⛶
-            </button>
-            <button type="button" class="btn-close-preview" onclick="togglePreview('${secao}', '${id}', false)" title="Fechar Preview">
-              ✕
-            </button>
-          </div>
-        </div>
-        <iframe class="preview-frame" sandbox="allow-scripts allow-same-origin"></iframe>
-      </div>
     </div>
     <div class="editor-footer">
       <button type="button" class="btn-test" onclick="executarCodigo('${secao}', '${id}')">▶ Executar</button>
-      <button type="button" class="btn-toggle-preview" onclick="togglePreview('${secao}', '${id}')">👁️ Preview</button>
-      <span style="color: #858585; font-size: 0.8rem;">Código Real da Atividade</span>
+      <span style="color: #858585; font-size: 0.8rem;">Código Real da Atividade - Clique em Executar para visualizar</span>
     </div>
   `;
   host.innerHTML = '';
   host.appendChild(editor);
   editor.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-function executarCodigo(secao, id) {
-  const editor = document.querySelector(`#code-host-${secao} .editor`);
-  const textarea = editor.querySelector('textarea[name="fonte"]');
-  const previewArea = document.getElementById(`preview-${secao}-${id}`);
-  const iframe = previewArea.querySelector('.preview-frame');
-  if (textarea && textarea.value.trim()) {
-    previewArea.style.display = 'flex';
-    iframe.srcdoc = textarea.value;
-    updateLayout(secao, id, true);
+async function executarCodigo(secao, id) {
+  const pasta = SECOES[secao].pasta;
+  let caminhosPossiveis = [];
+  
+  if (id === 'exemplo') {
+    caminhosPossiveis = [
+      `atividades/${pasta}/exemplo/index.html`,
+      `atividades/${pasta}/exemplo/Index.html`
+    ];
   } else {
-    alert('Por favor, insira algum código para executar.');
+    const numero = id.replace('a', '');
+    caminhosPossiveis = [
+      `atividades/${pasta}/${numero.padStart(2, '0')}/index.html`,
+      `atividades/${pasta}/${numero}/index.html`,
+      `atividades/${pasta}/atividade ${numero}/index.html`
+    ];
   }
-}
-function togglePreview(secao, id, show = null) {
-  const previewArea = document.getElementById(`preview-${secao}-${id}`);
-  const isVisible = previewArea.style.display !== 'none';
-  if (show === null) show = !isVisible;
-  previewArea.style.display = show ? 'flex' : 'none';
-  updateLayout(secao, id, show);
-}
-function updateLayout(secao, id, showPreview) {
-  const editor = document.querySelector(`#code-host-${secao} .editor`);
-  const editorMain = editor.querySelector('.editor-main');
-  if (showPreview) {
-    editorMain.style.display = 'flex';
-    editorMain.style.flexDirection = 'row';
-  } else {
-    editorMain.style.display = 'block';
-  }
-}
-function toggleExpandPreview(secao, id) {
-  const editor = document.querySelector(`#code-host-${secao} .editor`);
-  const previewArea = document.getElementById(`preview-${secao}-${id}`);
-  const expandBtn = previewArea.querySelector('.btn-expand-preview');
-  const isExpanded = editor.classList.contains('preview-expanded');
-  if (isExpanded) {
-    editor.classList.remove('preview-expanded');
-    expandBtn.innerHTML = '⛶';
-    expandBtn.title = 'Expandir Preview';
-    document.removeEventListener('keydown', handleEscapeKey);
-  } else {
-    editor.classList.add('preview-expanded');
-    expandBtn.innerHTML = '⛷';
-    expandBtn.title = 'Reduzir Preview';
-    document.addEventListener('keydown', handleEscapeKey);
-  }
-  function handleEscapeKey(event) {
-    if (event.key === 'Escape') {
-      toggleExpandPreview(secao, id);
+  let caminhoEncontrado = null;
+  for (const caminho of caminhosPossiveis) {
+    try {
+      const response = await fetch(caminho, { method: 'HEAD' });
+      if (response.ok) {
+        caminhoEncontrado = caminho;
+        break;
+      }
+    } catch (error) {
     }
+  }
+  
+  if (caminhoEncontrado) {
+    window.location.href = caminhoEncontrado;
+  } else {
+    window.location.href = caminhosPossiveis[0];
   }
 }
 function montarTelaEstrutura(secao) {
@@ -217,9 +182,10 @@ function abrirSecao(secao) {
   const app = document.getElementById('app');
   if (secao === 'home') {
     app.innerHTML = `
-      <h1 class="title">Conceitos Sobre Estruturas em HTML, CSS e JavaScript</h1>
+      <h1 class="title">Estruturas da Web: HTML, CSS e JavaScript</h1>
       <div class="card">
-        <p>Repositório das atividades em programação desenvolvidas com HTML, CSS e JavaScript, organizado para reunir exercícios práticos, exemplos comentados e pequenos projetos que consolidam os principais conceitos da web. Serve como uma base de conhecimento viva para consultas futuras, permitindo revisar rapidamente estruturas fundamentais. </p>
+        <p>Repositório de atividades de programação desenvolvidas em HTML, CSS e JavaScript. 
+        Uma base de conhecimento para consultas futuras e aprendizado de estruturas fundamentais.</p>
       </div>
     `;
     return;
@@ -256,7 +222,7 @@ const ENUNCIADOS = {
   'rep-facaEnquanto': {
     'a1': 'Algoritmo que leia quantos números o usuário desejar e imprima o somatório (digite 0 para finalizar).',
     'a2': 'Programa para gerar a tabuada de um número digitado pelo usuário usando DO-WHILE.',
-    'a3': 'Foi desenvolvido um sistema em que escreva o total de alunos por turma e mostre a media superior ou igual a 7 e a media geral da turma.'
+    'a3': 'Foi desenvolvido um sistema em que escreva o total de alunos por turma e sera mostrado se a media é superior ou igual a 7 e a media geral da turma.'
   },
   'rep-para': {
     'a1': 'Implementação de contador ou laço usando estrutura FOR.'
