@@ -1,11 +1,10 @@
-/* === Reset + tema básico === */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
-
 :root {
     --primaria: #4f46e5;
     --secundaria: #7c3aed;
@@ -14,17 +13,13 @@
     --claro: #e2e8f0;
     --vidro: rgba(255, 255, 255, .1)
 }
-
 html {
     scroll-behavior: smooth
 }
-
 body {
     background: var(--escuro);
     color: var(--claro)
 }
-
-/* partículas de fundo */
 .particulas {
     position: fixed;
     inset: 0;
@@ -35,8 +30,6 @@ body {
         radial-gradient(circle at 90% 80%, var(--secundaria)0, transparent 20%),
         var(--maisEscuro);
 }
-
-/* topo / navegação */
 .navegacao {
     position: sticky;
     top: 0;
@@ -97,7 +90,6 @@ body {
     transform: scaleX(1)
 }
 
-/* submenu */
 .submenu {
     position: absolute;
     top: 100%;
@@ -137,26 +129,22 @@ body {
 main {
     padding: 90px 0 80px
 }
-
 .title {
     text-align: center;
     font-size: 2rem;
     font-weight: 900;
-    margin: 10px 0 20px
+    margin: 10px 0 20px;
+    margin-top: 130px;
 }
-
 .card {
     background: rgba(255, 255, 255, .05);
     border: 1px solid var(--vidro);
     border-radius: 16px;
     padding: 20px;
-
-    max-width: 400px;   /* ajuste: 720–960px */
-    margin: 0 auto;     /* centraliza o bloco */
-    text-align: center; /* centraliza as linhas de texto */
+    max-width: 400px;   
+    margin: 0 auto;    
+    text-align: center; 
   }
-  
-
 .pagina-estrutura .topo-estrutura {
     font-size: 1.6rem;
     font-weight: 800;
@@ -169,25 +157,21 @@ main {
     grid-template-columns: 270px 1fr;
     gap: 28px
 }
-
 .sidebar {
     background: linear-gradient(180deg, #3b3f4a, #222836);
     border: 1px solid var(--vidro);
     border-radius: 12px;
     padding: 14px 0
 }
-
 .sidebar h3 {
     font-weight: 800;
     font-size: 1.25rem;
     margin: 0 18px 8px
 }
-
 .lista-atividades {
     list-style: none;
     margin-top: 6px
 }
-
 .lista-atividades li {
     display: flex;
     align-items: center;
@@ -197,15 +181,12 @@ main {
     border-top: 1px solid rgba(255, 255, 255, .06);
     cursor: pointer
 }
-
 .lista-atividades li:hover {
     background: rgba(255, 255, 255, .05)
 }
-
 .lista-atividades li.active {
     background: rgba(99, 102, 241, .22)
 }
-
 .lista-atividades .ver {
     font-size: .85rem;
     background: transparent;
@@ -215,11 +196,9 @@ main {
     padding: 6px 10px;
     cursor: pointer
 }
-
 .lista-atividades .ver:hover {
     background: rgba(255, 255, 255, .08)
 }
-
 .painel {
     background: rgba(255, 255, 255, .05);
     border: 1px solid var(--vidro);
@@ -230,24 +209,18 @@ main {
     flex-direction: column;
     gap: 14px
 }
-
 .painel .enunciado{
     border:0;          
     border-radius:12px;
     padding:26px;
     text-align:center;
-    font-size:1.1rem;
-    
+    font-size:1.1rem; 
     background: rgba(255,255,255,.04);
   }
-  
-
 .painel .meta {
     opacity: .8;
     font-size: .92rem
 }
-
-
 .editor {
     background: #1e1e1e;
     border: 1px solid #404040;
@@ -256,7 +229,6 @@ main {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     margin-top: 16px;
 }
-
 .editor-header {
     background: #2d2d30;
     border-bottom: 1px solid #404040;
@@ -267,7 +239,6 @@ main {
     font-size: 0.9rem;
     color: #cccccc;
 }
-
 .editor-tab {
     background: #3c3c3c;
     border: 1px solid #404040;
@@ -279,24 +250,20 @@ main {
     align-items: center;
     gap: 6px;
 }
-
 .editor-tab::before {
     content: "📄";
     font-size: 0.8rem;
 }
-
 .editor-main {
     display: block;
     background: #1e1e1e;
 }
-
 .editor-content {
     display: flex;
     background: #1e1e1e;
     min-height: 400px;
     flex: 1;
 }
-
 .preview-content {
     display: none;
     flex-direction: column;
@@ -305,7 +272,6 @@ main {
     width: 50%;
     min-height: 400px;
 }
-
 .preview-header {
     background: #3c3c3c;
     border-bottom: 1px solid #404040;
@@ -316,13 +282,11 @@ main {
     font-size: 0.9rem;
     color: #cccccc;
 }
-
 .preview-controls {
     display: flex;
     gap: 8px;
     align-items: center;
 }
-
 .btn-close-preview,
 .btn-expand-preview {
     background: transparent;
@@ -334,16 +298,13 @@ main {
     border-radius: 4px;
     transition: background 0.2s;
 }
-
 .btn-close-preview:hover,
 .btn-expand-preview:hover {
     background: rgba(255, 255, 255, 0.1);
 }
-
 .btn-expand-preview {
     font-size: 16px;
 }
-
 
 .editor.preview-expanded {
     position: fixed;
@@ -356,13 +317,11 @@ main {
     margin: 0;
     border-radius: 0;
 }
-
 .editor.preview-expanded .editor-header {
     background: #2d2d30;
     border-bottom: 1px solid #404040;
     padding: 12px 20px;
 }
-
 .editor.preview-expanded .editor-main {
     height: calc(100vh - 120px);
     display: flex !important;
@@ -457,7 +416,6 @@ main {
     gap: 12px;
     align-items: center;
 }
-
 .editor .btn-test {
     background: #0e639c;
     color: white;
@@ -469,11 +427,9 @@ main {
     transition: background 0.2s;
     margin-right: 8px;
 }
-
 .editor .btn-test:hover {
     background: #1177bb;
 }
-
 .editor .btn-toggle-preview {
     background: #6b5b95;
     color: white;
@@ -489,8 +445,6 @@ main {
 .editor .btn-toggle-preview:hover {
     background: #7d6ba8;
 }
-
-/* Syntax highlighting básico */
 .syntax-html { color: #569cd6; }
 .syntax-tag { color: #92c5f7; }
 .syntax-attribute { color: #9cdcfe; }
@@ -502,7 +456,6 @@ main {
 .syntax-property { color: #9cdcfe; }
 .syntax-value { color: #ce9178; }
 
-/* responsivo */
 @media (max-width:900px) {
     .nav {
         gap: 16px
